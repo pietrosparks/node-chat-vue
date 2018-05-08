@@ -3,7 +3,7 @@ const cors = require('cors');
 const fs = require('fs');
 const path = require('path');
 const secrets = require('./dbconfig/secrets');
-const history = require('connect-history-api-fallback');
+// const history = require('connect-history-api-fallback');
 const logger = require('morgan');
 const serveStatic = require('serve-static');
 
@@ -37,7 +37,7 @@ return next(new Error('You like going under the hood, i like you. Contact me '))
 
 module.exports = (app, express) => {
 
-const api = require('./routes/api')(express);
+// const api = require('./routes/api')(express);
 //Initializing the Cors configuration 
 app.use(cors(corsConfig), (req, res, next) => {
   next();
@@ -46,10 +46,10 @@ app.use(cors(corsConfig), (req, res, next) => {
 
 //   app.set('views', path.join(__dirname, 'views'));
 //   app.set('view engine', 'ejs');
-app.use('/api', api);
+// app.use('/api', api);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}))
-app.use(history({verbose: true}))
+// app.use(history({verbose: true}))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('short'));
   app.use(serveStatic(__dirname + "/dist"));
