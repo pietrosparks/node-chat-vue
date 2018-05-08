@@ -44,7 +44,7 @@
 
                 <article class="message is-info is-pulled-right" v-if="msg.from == username">
                   <div class="message-header"> 
-                    <p> {{msg.to}}</p>
+                    <p> {{msg.from}}</p>
 
                   </div>
                   <div class="message-body">
@@ -54,7 +54,7 @@
 
                 <article class="message is-success is-pulled-left" v-else>
                   <div class="message-header">
-                    <p> {{msg.to}}</p>
+                    <p> {{msg.from}}</p>
 
                   </div>
                   <div class="message-body">

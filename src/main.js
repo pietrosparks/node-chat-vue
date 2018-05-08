@@ -6,6 +6,9 @@ import router from './router'
 import VueSocketio from 'vue-socket.io'
 import Buefy from 'buefy';
 import 'buefy/lib/buefy.css';
+import Es6Promise from 'es6-promise'
+
+Es6Promise.polyfill()
 
 
 
