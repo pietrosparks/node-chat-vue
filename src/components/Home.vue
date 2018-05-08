@@ -165,8 +165,8 @@
  .my-box{
    display: block;
    height: 100px;
+   margin-top: 20px; 
+   margin-bottom:20px;
  }
- .main{
-   padding: 50px;
- }
+ 
 </style>

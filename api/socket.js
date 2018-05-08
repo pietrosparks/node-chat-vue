@@ -25,8 +25,11 @@ module.exports = (io) => {
                     return msg;
                 }
             })
-            io.sockets.connected[data.to.id].emit('private_message',personal_messages);
-            io.sockets.connected[socket.id].emit('private_message',personal_messages);
+            if( io.sockets.connected[data.to.id]){
+                io.sockets.connected[data.to.id].emit('private_message',personal_messages);
+                io.sockets.connected[socket.id].emit('private_message',personal_messages);
+            }
+            
 
 
 
@@ -38,8 +41,11 @@ module.exports = (io) => {
                     return msg;
                 }
             })
-            io.sockets.connected[data.id].emit('init_get_private_messages',personal_messages);
-            io.sockets.connected[socket.id].emit('init_get_private_messages',personal_messages);
+            if( io.sockets.connected[data.id]){
+                io.sockets.connected[data.id].emit('init_get_private_messages',personal_messages);
+                io.sockets.connected[socket.id].emit('init_get_private_messages',personal_messages);
+            }
+            
         })
 
         socket.on('disconnect', ()=>{
