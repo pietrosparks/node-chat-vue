@@ -5,6 +5,7 @@ const path = require('path');
 const secrets = require('./dbconfig/secrets');
 const history = require('connect-history-api-fallback');
 const logger = require('morgan');
+const serveStatic = require('serve-static');
 
 //CORS CONFIGURATION
 
@@ -51,7 +52,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(history({verbose: true}))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('short'));
-//   app.use(serveStatic(__dirname + "/dist"));
+  app.use(serveStatic(__dirname + "/dist"));
 
 //catch errors 
 app.use((req, res, next) => {
