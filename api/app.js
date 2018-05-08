@@ -5,7 +5,7 @@ const database = require('./dbconfig/database');
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 require('./socket')(io);
-database.connect()
+// database.connect()
 
 require('./config')(app, express);
 
