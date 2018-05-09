@@ -28,12 +28,12 @@
         </div>
 
         <div class="columns is-centered" v-else>
-          
+
           <div class="column is-one-third main" v-if="users !== null">
-              <h1 class="title is-size-4">{{username}}</h1>
+            <h1 class="title is-size-4">{{username}}</h1>
             <h1 class="title is-size-3">Users currently online</h1>
             <div class="box" v-for="user in users_filtered" @click="open_user(user)">
-              <p>{{user}}</p>
+              <p>{{user}} <a class="button" :class="{'is-primary':!notification, 'is-info':notification}"></a></p> 
             </div>
           </div>
           <div class="column is-two-thirds main" v-if="chat_open == true">
@@ -41,11 +41,9 @@
             <div class="box">
               <div class="my-box " v-if="current_message" v-for="msg in current_message">
 
-
                 <article class="message is-info is-pulled-right" v-if="msg.from == username">
-                  <div class="message-header"> 
+                  <div class="message-header">
                     <p> {{msg.from}}</p>
-
                   </div>
                   <div class="message-body">
                     {{msg.msg}}
@@ -79,7 +77,7 @@
     data() {
       return {
         msg: 'Welcome to Your Vue.js App',
-        username:"",
+        username: "",
         user_checked: false,
         users: null,
         chat_open: false,
@@ -88,11 +86,11 @@
         current_chat: null,
         current_chat_name: null,
         messages: {},
-        current_message: null
+        current_message: null,
+        notification: false
       }
     },
     methods: {
-
       check_user() {
         this.$socket.emit('new_user', this.username, (data) => {
           if (data) {
@@ -109,9 +107,7 @@
           id: this.current_chat,
           name: this.current_chat_name
         })
-
       },
-
       send_message() {
         this.chat_msg.to = {
           id: this.current_chat,
@@ -120,9 +116,7 @@
         this.$socket.emit('private_message', this.chat_msg);
         this.chat_msg = {}
       }
-
     },
-
     computed: {
       update_list() {
         this.$socket.on('usernames', (data) => {
@@ -134,39 +128,39 @@
       },
       update_msg() {
         this.$socket.on('private_message', (data) => {
+          if(data[data.length-1].from !== this.username){
+            this.current_chat_name = data[data.length-1].from
+          }
           this.current_message = data;
         })
         this.$socket.on('init_get_private_messages', (data) => {
+          console.log(data);
           this.current_message = data;
         })
       },
 
-      users_filtered(){
-        const displayed_users = this.users.name.filter(user=>{
-          if(user !== this.username){
+      users_filtered() {
+        const displayed_users = this.users.name.filter(user => {
+          if (user !== this.username) {
             return user
           }
         })
-        console.log(displayed_users,"ssk")
         return displayed_users;
       }
     },
-
     mounted() {
       this.update_list;
       this.update_msg;
-
     }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
- .my-box{
-   display: block;
-   height: 100px;
-   margin-top: 20px; 
-   margin-bottom:20px;
- }
- 
+  .my-box {
+    display: block;
+    height: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
 </style>

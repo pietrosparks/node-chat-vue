@@ -45,7 +45,7 @@ module.exports = (io) => {
                 io.sockets.connected[data.id].emit('init_get_private_messages',personal_messages);
                 io.sockets.connected[socket.id].emit('init_get_private_messages',personal_messages);
             }
-            
+        
         })
 
         socket.on('disconnect', ()=>{
