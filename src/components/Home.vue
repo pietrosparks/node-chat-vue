@@ -133,7 +133,6 @@
           if(data[data.length-1].from !== this.username){
             this.current_chat_name = data[data.length-1].from
             this.current_chat=  this.raw_user_obj[data[data.length-1].from]
-            console.log(this.current_chat,"current")
           }
           this.current_message = data;
         })
