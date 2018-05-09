@@ -42,19 +42,19 @@
               <div class="my-box " v-if="current_message" v-for="msg in current_message">
 
                 <article class="message is-info is-pulled-right" v-if="msg.from == username">
-                  <div class="message-header">
+                  <!-- <div class="message-header">
                     <p> {{msg.from}}</p>
-                  </div>
+                  </div> -->
                   <div class="message-body">
                     {{msg.msg}}
                   </div>
                 </article>
 
                 <article class="message is-success is-pulled-left" v-else>
-                  <div class="message-header">
+                  <!-- <div class="message-header">
                     <p> {{msg.from}}</p>
 
-                  </div>
+                  </div> -->
                   <div class="message-body">
                     {{msg.msg}}
                   </div>
