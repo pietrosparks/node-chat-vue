@@ -87,6 +87,7 @@
         current_chat_name: null,
         messages: {},
         current_message: null,
+        raw_user_obj:null
       
       }
     },
@@ -120,6 +121,7 @@
     computed: {
       update_list() {
         this.$socket.on('usernames', (data) => {
+          this.raw_user_obj = data;
           this.users = {
             id: data,
             name: Object.keys(data)
@@ -130,6 +132,8 @@
         this.$socket.on('private_message', (data) => {
           if(data[data.length-1].from !== this.username){
             this.current_chat_name = data[data.length-1].from
+            this.current_chat=  this.raw_user_obj[data[data.length-1].from]
+            console.log(this.current_chat,"current")
           }
           this.current_message = data;
         })
