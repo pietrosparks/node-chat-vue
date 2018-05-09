@@ -15,8 +15,8 @@
             <div class="box">
               <div class="field">
                 <div class="control">
-                  <input type="text" class="input" placeholder="Username" v-model="username">
-                </div>
+                  <input type="text" class="input" placeholder="Username" v-model="username"  @keyup.enter='check_user()'>
+                </div> 
               </div>
               <div class="field">
                 <a class="button is-primary" @click='check_user()'>Enter</a>
@@ -33,7 +33,7 @@
             <h1 class="title is-size-4">{{username}}</h1>
             <h1 class="title is-size-3">Users currently online</h1>
             <div class="box" v-for="user in users_filtered" @click="open_user(user)">
-              <p>{{user}} <a class="button" :class="{'is-primary':!notification, 'is-info':notification}"></a></p> 
+              <p>{{user}}</p> 
             </div>
           </div>
           <div class="column is-two-thirds main" v-if="chat_open == true">
@@ -60,9 +60,9 @@
                   </div>
                 </article>
               </div>
-              <input type="text" class="input" placeholder="Message" v-model="chat_msg.message">
+              <input type="text" class="input" placeholder="Message" v-model="chat_msg.message" @keyup.enter='send_message()'>
             </div>
-            <a class="button is-info" @click="send_message()">Send</a>
+            <a class="button is-info" @click="send_message()" >Send</a>
           </div>
         </div>
 
@@ -87,7 +87,7 @@
         current_chat_name: null,
         messages: {},
         current_message: null,
-        notification: false
+      
       }
     },
     methods: {
